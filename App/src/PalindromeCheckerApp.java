@@ -1,19 +1,23 @@
-public class PalindromeCheckerApp {
-
+public class UseCase3PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Display Welcome Message
-        System.out.println("=================================");
-        System.out.println("     Palindrome Checker App      ");
-        System.out.println("=================================");
+        // Original string
+        String original = "level";
 
-        // Display Application Details
-        System.out.println("Application Name    : Palindrome Checker");
-        System.out.println("Application Version : 1.0");
+        // Variable to store reversed string
+        String reversed = "";
 
-        System.out.println("---------------------------------");
-        System.out.println("Welcome! The application is starting...");
-        System.out.println("Proceeding to next use case...");
+        // Reverse using for loop
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
+        }
+
+        // Compare original and reversed strings
+        if (original.equals(reversed)) {
+            System.out.println(original + " is a Palindrome");
+        } else {
+            System.out.println(original + " is not a Palindrome");
+        }
     }
 }
