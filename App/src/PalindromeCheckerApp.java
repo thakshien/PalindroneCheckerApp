@@ -1,19 +1,88 @@
-public class PalindromeCheckerApp {
+import java.util.Scanner;
 
+class Node {
+    char data;
+    Node next;
+
+    Node(char data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class UseCase8PalindromeCheckerApp {
+
+    // Method to check palindrome
+    public static boolean isPalindrome(Node head) {
+
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        // Find middle using fast and slow pointer
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse second half
+        Node prev = null;
+        Node current = slow;
+
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+
+        // Compare first half and reversed second half
+        Node firstHalf = head;
+        Node secondHalf = prev;
+
+        while (secondHalf != null) {
+            if (firstHalf.data != secondHalf.data) {
+                return false;
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
 
-        // Display Welcome Message
-        System.out.println("=================================");
-        System.out.println("     Palindrome Checker App      ");
-        System.out.println("=================================");
+        Scanner scanner = new Scanner(System.in);
 
-        // Display Application Details
-        System.out.println("Application Name    : Palindrome Checker");
-        System.out.println("Application Version : 1.0");
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
 
-        System.out.println("---------------------------------");
-        System.out.println("Welcome! The application is starting...");
-        System.out.println("Proceeding to next use case...");
+        // Convert string to linked list
+        Node head = null;
+        Node tail = null;
+
+        for (char c : input.toCharArray()) {
+            Node newNode = new Node(c);
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        // Check palindrome
+        if (isPalindrome(head)) {
+            System.out.println("The given string is a Palindrome.");
+        } else {
+            System.out.println("The given string is not a Palindrome.");
+        }
+
+        scanner.close();
     }
 }
