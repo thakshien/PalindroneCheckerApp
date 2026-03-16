@@ -1,19 +1,37 @@
-public class PalindromeCheckerApp {
+import java.util.Scanner;
+import java.util.Stack;
 
+public class UseCase5PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Display Welcome Message
-        System.out.println("=================================");
-        System.out.println("     Palindrome Checker App      ");
-        System.out.println("=================================");
+        Scanner scanner = new Scanner(System.in);
 
-        // Display Application Details
-        System.out.println("Application Name    : Palindrome Checker");
-        System.out.println("Application Version : 1.0");
+        // Take input from user
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
 
-        System.out.println("---------------------------------");
-        System.out.println("Welcome! The application is starting...");
-        System.out.println("Proceeding to next use case...");
+        // Create stack
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
+
+        // Pop characters and build reversed string
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+
+        // Check palindrome
+        if (input.equals(reversed)) {
+            System.out.println("The given string is a Palindrome.");
+        } else {
+            System.out.println("The given string is not a Palindrome.");
+        }
+
+        scanner.close();
     }
 }
